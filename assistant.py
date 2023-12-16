@@ -5,6 +5,10 @@ import json
 
 from openai import OpenAI
 
+os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
+    
+client = OpenAI()
+
 def submit_message(assistant_id, thread, user_message):
     client.beta.threads.messages.create(
         thread_id=thread.id, role="user", content=user_message
@@ -35,10 +39,6 @@ def pretty_print(messages):
 
 
 def main():
-
-    os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
-    
-    client = OpenAI()
 
     assistant = client.beta.assistants.create(
     name = "Nutritionist",
